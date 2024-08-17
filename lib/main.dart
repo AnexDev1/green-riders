@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:greendriver/src/screens/MainScreen.dart';
+import 'package:greendriver/src/screens/ProfileScreen.dart';
+import 'package:greendriver/src/screens/SettingsScreen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import 'firebase_options.dart';
@@ -48,12 +51,12 @@ class MyApp extends StatelessWidget {
       ),
       confineToSafeArea: true,
       navBarHeight: kBottomNavigationBarHeight,
-      navBarStyle: NavBarStyle.style1,
+      navBarStyle: NavBarStyle.style3,
     );
   }
 
   List<Widget> _buildScreens() {
-    return [MainScreen(), SettingsScreen()];
+    return [const MainScreen(), const SettingsScreen(), const ProfileScreen()];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -70,34 +73,12 @@ class MyApp extends StatelessWidget {
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.profile_circled),
+        title: ("Profile"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
     ];
-  }
-}
-
-class MainScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Main Screen'),
-      ),
-      body: const Center(
-        child: Text('Main Screen Content'),
-      ),
-    );
-  }
-}
-
-class SettingsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings Screen'),
-      ),
-      body: const Center(
-        child: Text('Settings Screen Content'),
-      ),
-    );
   }
 }
