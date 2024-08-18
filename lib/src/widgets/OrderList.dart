@@ -79,10 +79,17 @@ class OrderList extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CustomerLocation(
-                                              userLocation:
-                                                  LatLng(51.509365, -0.128928),
+                                        builder: (context) => CustomerLocation(
+                                              userLocation: LatLng(
+                                                order['location']['latitude'],
+                                                order['location']['longitude'],
+                                              ), // Example coordinates
+                                              riderLocations: const [
+                                                LatLng(7.6764406,
+                                                    36.832514), // Example rider coordinates
+                                                // Example rider coordinates
+                                                // Example rider coordinates
+                                              ],
                                             )),
                                   );
                                   // Handle accept action
