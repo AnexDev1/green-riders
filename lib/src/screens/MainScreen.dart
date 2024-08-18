@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:greendriver/src/widgets/OrderList.dart';
 
 import '../widgets/OverView.dart';
 
@@ -55,23 +56,7 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         children: [
           const Overview(),
-          Expanded(
-            child: _orders.isEmpty
-                ? const Center(child: Text('No orders found'))
-                : ListView.builder(
-                    itemCount: _orders.length,
-                    itemBuilder: (context, index) {
-                      final order = _orders[index];
-                      final paymentData =
-                          order['paymentData'] as Map<dynamic, dynamic>;
-                      return ListTile(
-                        title: Text('Order ID: ${paymentData['reference']}'),
-                        subtitle: Text(
-                            'User: ${paymentData['first_name']} - Amount: ${paymentData['amount']} Birr'),
-                      );
-                    },
-                  ),
-          ),
+          OrderList(orders: _orders),
         ],
       ),
     );
