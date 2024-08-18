@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
+
+import '../screens/CustomerLocation.dart';
 
 class OrderList extends StatelessWidget {
   const OrderList({
@@ -74,6 +77,14 @@ class OrderList extends StatelessWidget {
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CustomerLocation(
+                                              userLocation:
+                                                  LatLng(51.509365, -0.128928),
+                                            )),
+                                  );
                                   // Handle accept action
                                 },
                                 style: ElevatedButton.styleFrom(
