@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:greendriver/src/screens/MainScreen.dart';
-import 'package:greendriver/src/screens/ProfileScreen.dart';
-import 'package:greendriver/src/screens/SettingsScreen.dart';
+import 'package:greendriver/screens/ProfileScreen.dart';
+import 'package:greendriver/screens/SettingsScreen.dart';
+import 'package:greendriver/screens/main_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import 'firebase_options.dart';
@@ -56,7 +56,11 @@ class MyApp extends StatelessWidget {
   }
 
   List<Widget> _buildScreens() {
-    return [const MainScreen(), const SettingsScreen(), const ProfileScreen()];
+    return [
+      const MainScreen(),
+      const SettingsScreen(),
+      const ProfileScreen(),
+    ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {

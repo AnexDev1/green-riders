@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../services/route_service.dart';
 
 class CustomerLocation extends StatefulWidget {
   final LatLng userLocation;
@@ -32,7 +31,8 @@ class _CustomerLocationState extends State<CustomerLocation> {
   Future<void> _fetchRoutes() async {
     List<Polyline> polylines = [];
     for (LatLng riderLocation in widget.riderLocations) {
-      final route = await _getRoute(riderLocation, widget.userLocation);
+      final route =
+          await RouteService.getRoute(riderLocation, widget.userLocation);
       if (route != null) {
         polylines.add(Polyline(
           points: route,
@@ -44,21 +44,6 @@ class _CustomerLocationState extends State<CustomerLocation> {
     setState(() {
       _polylines = polylines;
     });
-  }
-
-  Future<List<LatLng>?> _getRoute(LatLng start, LatLng end) async {
-    final url = Uri.parse(
-        'https://router.project-osrm.org/route/v1/driving/${start.longitude},${start.latitude};${end.longitude},${end.latitude}?overview=full&geometries=geojson');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final List<dynamic> coordinates =
-          data['routes'][0]['geometry']['coordinates'];
-      return coordinates.map((coord) => LatLng(coord[1], coord[0])).toList();
-    } else {
-      return null;
-    }
   }
 
   @override

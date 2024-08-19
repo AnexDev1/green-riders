@@ -1,9 +1,9 @@
 // lib/src/screens/SettingsScreen.dart
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:greendriver/src/models/DriverModel.dart';
 
-import 'LocationService.dart';
+import '../models/driver_model.dart';
+import '../services/location_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

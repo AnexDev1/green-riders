@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:greendriver/src/screens/OrderAcceptanceScreen.dart';
+
+import '../screens/order_acceptance_screen.dart';
 
 class OrderList extends StatelessWidget {
   const OrderList({

@@ -1,6 +1,6 @@
-// lib/src/services/LocationService.dart
-import 'package:geolocator/geolocator.dart';
+// lib/src/services/location_service.dart
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class LocationService {
   Future<Position> getCurrentLocation(BuildContext context) async {
@@ -40,7 +40,8 @@ class LocationService {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Enable Location Services'),
-          content: Text('Location services are disabled. Please enable them to continue.'),
+          content: Text(
+              'Location services are disabled. Please enable them to continue.'),
           actions: <Widget>[
             TextButton(
               child: Text('Cancel'),
