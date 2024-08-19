@@ -44,6 +44,7 @@ dependencies:
   url_launcher: ^6.3.0
   slide_to_act: ^2.0.2
   geolocator: ^12.0.0
+  firebase_auth: ^5.1.4
 
 dev_dependencies:
   flutter_test:
