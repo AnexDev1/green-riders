@@ -10,9 +10,9 @@ class Driver {
   final double latitude;
   final double longitude;
   final String status;
-  final String profilePictureUrl;
 
-  Driver({
+  Driver(
+    this.status, {
     required this.id,
     required this.name,
     required this.email,
@@ -21,8 +21,6 @@ class Driver {
     required this.licensePlate,
     required this.latitude,
     required this.longitude,
-    required this.status,
-    required this.profilePictureUrl,
   });
 
   Map<String, dynamic> toJson() {
@@ -36,7 +34,6 @@ class Driver {
       'latitude': latitude,
       'longitude': longitude,
       'status': status,
-      'profilePictureUrl': profilePictureUrl,
     };
   }
 }
