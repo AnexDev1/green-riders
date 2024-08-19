@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latlong2/latlong.dart';
-
-import '../screens/CustomerLocation.dart';
+import 'package:greendriver/src/screens/OrderAcceptanceScreen.dart';
 
 class OrderList extends StatelessWidget {
   const OrderList({
@@ -79,20 +77,12 @@ class OrderList extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
-                                        builder: (context) => CustomerLocation(
-                                              userLocation: LatLng(
-                                                order['location']['latitude'],
-                                                order['location']['longitude'],
-                                              ), // Example coordinates
-                                              riderLocations: const [
-                                                LatLng(7.6764406,
-                                                    36.832514), // Example rider coordinates
-                                                // Example rider coordinates
-                                                // Example rider coordinates
-                                              ],
-                                            )),
+                                      builder: (context) =>
+                                          OrderAcceptanceScreen(
+                                              countdownSeconds: 10,
+                                              order: order),
+                                    ),
                                   );
-                                  // Handle accept action
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding: const EdgeInsets.symmetric(
