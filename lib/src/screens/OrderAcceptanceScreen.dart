@@ -133,6 +133,7 @@ class _OrderAcceptanceScreenState extends State<OrderAcceptanceScreen> {
                     ),
                   ),
                 );
+                return null;
               },
             ),
           ],
