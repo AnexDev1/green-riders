@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:slide_to_act/slide_to_act.dart';
@@ -66,6 +67,29 @@ class _OrderAcceptanceScreenState extends State<OrderAcceptanceScreen> {
     );
   }
 
+  void _updateOrderStatus(String status) {
+    final DatabaseReference databaseReference =
+        FirebaseDatabase.instance.ref('payments');
+    databaseReference.once().then((DatabaseEvent event) {
+      final snapshot = event.snapshot;
+      if (snapshot.exists) {
+        for (var child in snapshot.children) {
+          final orderData = Map<String, dynamic>.from(
+              (child.value as Map<dynamic, dynamic>)
+                  .map((key, value) => MapEntry(key.toString(), value)));
+          print(orderData);
+
+          if (orderData['paymentData']['reference'] ==
+              widget.order['paymentData']['reference']) {
+            final DatabaseReference orderReference = child.ref;
+            orderReference.update({'orderStatus': status});
+            break;
+          }
+        }
+      }
+    });
+  }
+
   @override
   void dispose() {
     _timer.cancel();
@@ -95,6 +119,7 @@ class _OrderAcceptanceScreenState extends State<OrderAcceptanceScreen> {
                 setState(() {
                   _orderPickedUp = true;
                 });
+                _updateOrderStatus('picked up');
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => CustomerLocation(

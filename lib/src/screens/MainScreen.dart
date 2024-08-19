@@ -15,6 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   final DatabaseReference _databaseReference =
       FirebaseDatabase.instance.ref('payments');
   List<Map<String, dynamic>> _orders = [];
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -31,17 +32,18 @@ class _MainScreenState extends State<MainScreen> {
           final orderData = Map<String, dynamic>.from(
               (child.value as Map<dynamic, dynamic>)
                   .map((key, value) => MapEntry(key.toString(), value)));
-          if (orderData['orderStatus'] == 'delivered') {
+          if (orderData['orderStatus'] == 'pending') {
             orders.add(orderData);
           }
         }
         setState(() {
           _orders = orders;
+          _isLoading = false;
         });
-        print(_orders);
       } else {
         setState(() {
           _orders = [];
+          _isLoading = false;
         });
       }
     });
@@ -56,7 +58,9 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         children: [
           const Overview(),
-          OrderList(orders: _orders),
+          _isLoading
+              ? const Center(child: CircularProgressIndicator())
+              : OrderList(orders: _orders),
         ],
       ),
     );
