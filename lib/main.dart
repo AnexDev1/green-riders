@@ -21,9 +21,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const AuthWrapper(),
+      home: AuthWrapper(),
     );
   }
 }
@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
   final PersistentTabController _controller =
       PersistentTabController(initialIndex: 0);
 
-  MyApp({Key? key}) : super(key: key);
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
