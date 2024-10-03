@@ -121,7 +121,7 @@ class _OrderAcceptanceScreenState extends State<OrderAcceptanceScreen> {
                         widget.order['location']['latitude'],
                         widget.order['location']['longitude'],
                       ),
-                      riderLocations: _riderLocations,
+                      riderLocations: _riderLocations, order:widget.order,
                     ),
                   ),
                 );

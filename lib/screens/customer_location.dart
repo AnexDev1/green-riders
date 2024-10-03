@@ -4,16 +4,19 @@ import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../services/route_service.dart';
+import '../services/order_service.dart';
 import 'main_screen.dart';
 
 class CustomerLocation extends StatefulWidget {
   final LatLng userLocation;
   final List<LatLng> riderLocations;
+  final Map<String, dynamic> order;
 
   const CustomerLocation({
     super.key,
     required this.userLocation,
     required this.riderLocations,
+    required this.order,
   });
 
   @override
@@ -62,11 +65,12 @@ class _CustomerLocationState extends State<CustomerLocation> {
               child: const Text('Cancel'),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 Navigator.of(context).pop(); // Close the dialog
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Order marked as complete!')),
                 );
+                OrderService.updateOrderStatus(widget.order, 'delivered'); // No need to await
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const MainScreen()),
